@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-bookstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-bookstore
+  template:
+    metadata:
+      labels:
+        app: flask-bookstore
+    spec:
+      containers:
+        - name: flask-bookstore
+          image: karam334/flask-bookstore:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_URI
+              value: mongodb://admin:admin@mongodb-service:27017/bookstore
